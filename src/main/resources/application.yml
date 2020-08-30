@@ -60,3 +60,5 @@ sky-blog:
   # QPS, 即一个 IP 每秒至多请求多少次
   limit:
     value: 10
+  # ip2region.db 文件绝对路径(需切换为自己电脑上的路径, 该 db 文件位于 resources 目录下, 可从该处获取该文件放在自己电脑的某个位置)
+  ip2-path: /home/work/SkyBlog/ip2region.db

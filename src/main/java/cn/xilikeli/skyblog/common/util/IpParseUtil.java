@@ -5,6 +5,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.lionsoul.ip2region.DataBlock;
 import org.lionsoul.ip2region.DbConfig;
 import org.lionsoul.ip2region.DbSearcher;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 /**
  * <p>
@@ -17,7 +19,15 @@ import org.lionsoul.ip2region.DbSearcher;
  * @since JDK1.8
  */
 @Slf4j
+@Component
 public class IpParseUtil {
+
+    private static String dbFilePath;
+
+    @Value("${sky-blog.ip2-path}")
+    public void setDbFilePath(String dbFilePath) {
+        IpParseUtil.dbFilePath = dbFilePath;
+    }
 
     /**
      * 解析 ip 地址获取地理位置信息
@@ -32,7 +42,6 @@ public class IpParseUtil {
             }
 
             DbConfig config = new DbConfig();
-            String dbFilePath = IpParseUtil.class.getResource("/ip2region.db").getPath();
             DbSearcher searcher = new DbSearcher(config, dbFilePath);
             DataBlock block = searcher.btreeSearch(ip);
             // 解析的地理位置格式: 国家|大区|省份|城市|运营商
