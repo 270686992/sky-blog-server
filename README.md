@@ -41,9 +41,9 @@
 
 博客前端查看请访问 [博客前端仓库](https://github.com/270686992/sky-blog-frontend)
 
-CMS 后端请访问 [后端仓库](https://github.com/270686992/sky-blog-cms-server)
+CMS 后端请访问 [CMS 后端仓库](https://github.com/270686992/sky-blog-cms-server)
 
-CMS 前端请访问 [前端仓库](https://github.com/270686992/sky-blog-cms-frontend)
+CMS 前端请访问 [CMS 前端仓库](https://github.com/270686992/sky-blog-cms-frontend)
 
 CMS 的后端和前端基于 Lin CMS 的基础进行开发, Lin CMS 地址: [https://github.com/TaleLin](https://github.com/TaleLin)
 
