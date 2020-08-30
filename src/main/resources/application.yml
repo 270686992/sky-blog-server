@@ -1,0 +1,62 @@
+# 主配置文件
+spring:
+  profiles:
+    active: dev # prod 使用环境: dev: 开发环境,prod: 生产环境
+  jpa:
+    hibernate:
+      ddl-auto: none # 关闭 JPA 模型生成表的机制
+  jackson:
+    property-naming-strategy: SNAKE_CASE # 配置序列化的 key 为下划线拼接的形式,xxx_xxx
+    serialization:
+      WRITE_DATES_AS_TIMESTAMPS: true # 配置返回的时间为时间戳形式(毫秒数)
+  mvc:
+    # 404 交给异常处理器处理
+    throw-exception-if-no-handler-found: true
+  resources:
+    # 关闭静态资源的映射
+    add-mappings: false
+  # freemarker 配置
+  freemarker:
+    template-loader-path: classpath:/static/template
+    enabled: true
+    cache: false
+    charset: UTF-8
+    content-type: text/html
+    allow-request-override: false
+    check-template-location: true
+    expose-request-attributes: false
+    expose-session-attributes: false
+    expose-spring-macro-helpers: false
+  # 邮件服务配置
+  mail:
+    host: smtp.163.com
+    port: 465
+    nickname: 博击长空站点站长 # 发件人昵称,自定义添加的配置项,非自带的邮件服务配置
+    username: xxxxxx@163.com
+    password: XXXXXXXXXXXXXXXX
+    default-encoding: UTF-8
+    protocol: smtps
+    properties:
+      mail:
+        smtp:
+          connectiontimeout: 10000
+          timeout: 10000
+          writetimeout: 10000
+          auth: true
+          starttls:
+            enable: true
+            required: true
+
+# 项目业务相关配置
+sky-blog:
+  # 站点网址首页地址
+  home-page-url: https://www.xilikeli.cn
+  # 游客进行评论/留言时的通知邮箱
+  inform-email: xxxxx@163.com
+  # 同一 ip 每天最多注册次数
+  ip-max-register-count: 5
+  # 同一 ip 每天最多登录次数
+  ip-max-login-count: 50
+  # QPS, 即一个 IP 每秒至多请求多少次
+  limit:
+    value: 10
