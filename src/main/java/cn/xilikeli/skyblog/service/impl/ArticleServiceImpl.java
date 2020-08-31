@@ -80,10 +80,10 @@ public class ArticleServiceImpl implements ArticleService {
         // 更新文章阅读量
         // 查看当前阅读文章的 ip 地址是否在缓存中并且没有过期,如果没有过期则不更新文章阅读量,反之更新
         String ip = HttpRequestProxy.getRemoteRealIp();
-        String ipCache = LocalCacheUtil.getLocalCache(LocalCacheUtil.CACHE_PREFIX + ip);
+        String ipCache = LocalCacheUtil.getLocalCache(LocalCacheUtil.CACHE_PREFIX + ip + article.getId());
         if (StringUtils.isBlank(ipCache)) {
-            // 缓存过期,更新文章阅读量,并且重新设置缓存
-            LocalCacheUtil.setLocalCache(LocalCacheUtil.CACHE_PREFIX + ip, CommonConstant.IP_CACHE_VALUE);
+            // 缓存过期或第一次阅读,更新文章阅读量,并且重新设置缓存
+            LocalCacheUtil.setLocalCache(LocalCacheUtil.CACHE_PREFIX + ip + article.getId(), CommonConstant.IP_CACHE_VALUE);
             article.setViews(article.getViews() + 1);
             this.articleRepository.save(article);
         }
