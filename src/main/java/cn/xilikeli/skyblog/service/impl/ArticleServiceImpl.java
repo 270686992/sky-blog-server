@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -143,14 +144,14 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Page<Article> getLatestArticleList(Integer page, Integer count) {
-        Pageable pageable = PageRequest.of(page, count);
-        return this.articleRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(page, count, Sort.by("priority"));
+        return this.articleRepository.findLatestArticleList(pageable);
     }
 
     @Override
     public List<ArticleSimplifyVO> getStarArticleList() {
-        Pageable pageable = PageRequest.of(0, 5);
-        Page<Article> articlePage = this.articleRepository.findAll(pageable);
+        Pageable pageable = PageRequest.of(0, 5, Sort.by("priority"));
+        Page<Article> articlePage = this.articleRepository.findLatestArticleList(pageable);
         List<Article> articleList = articlePage.getContent();
 
         if (articleList.isEmpty()) {
@@ -169,7 +170,7 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Page<Article> getLatestArticleListByCategoryId(Integer page, Integer count, Integer categoryId) {
-        Pageable pageable = PageRequest.of(page, count);
+        Pageable pageable = PageRequest.of(page, count, Sort.by("priority"));
         return this.articleRepository.findByCategoryId(categoryId, pageable);
     }
 
@@ -181,10 +182,10 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Page<Article> getLatestArticleListByKeyword(Integer page, Integer count, String keyword) {
-        Pageable pageable = PageRequest.of(page, count);
+        Pageable pageable = PageRequest.of(page, count, Sort.by("priority"));
 
         if (StringUtils.isBlank(keyword)) {
-            return this.articleRepository.findAll(pageable);
+            return this.articleRepository.findLatestArticleList(pageable);
         } else {
             keyword = "%" + keyword + "%";
             return this.articleRepository.findByTitleLikeOrDescriptionLike(keyword, keyword, pageable);

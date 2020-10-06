@@ -2,6 +2,7 @@ package cn.xilikeli.skyblog.repository;
 
 import cn.xilikeli.skyblog.model.FriendLink;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
@@ -23,6 +24,7 @@ public interface FriendLinkRepository extends JpaRepository<FriendLink, Integer>
      * @param kind 友情链接类型: 0-友情链接,1-推荐链接,2-站长个人链接
      * @return 返回查询的指定类型的友情链接列表
      */
+    @Query("select f from FriendLink f where f.priority > 0 and f.kind = :kind order by f.priority")
     List<FriendLink> findByKind(Integer kind);
 
 }
