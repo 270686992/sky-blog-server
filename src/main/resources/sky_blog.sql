@@ -7,7 +7,7 @@
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `id`             INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '文章分类 ID,自增主键',
-  `priority`       INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章分类权重,权重值越低,展示的位置越上',
+  `priority`       INT(10) UNSIGNED NOT NULL DEFAULT '1' COMMENT '文章分类权重,权重值越低,展示的位置越上',
   `online`         TINYINT(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '文章分类的上线状态: 1-上线,0-下线',
   `name`           VARCHAR(50) NOT NULL COMMENT '文章分类名称',
   `description`    VARCHAR(255) DEFAULT NULL COMMENT '文章分类描述',
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `article` (
   `cover_image`    VARCHAR(255) DEFAULT NULL COMMENT '文章封面图 url',
   `publish_state`  TINYINT(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章发布状态: 0-私密,1-发布',
   `views`          INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章阅读量',
-  `priority`       INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章权重,权重值越低,展示的位置越上',
+  `priority`       INT(10) UNSIGNED NOT NULL DEFAULT '1' COMMENT '文章权重,权重值越低,展示的位置越上',
   `kind`           TINYINT(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '文章类型: 0-转载,1-原创',
   `comment_number` INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '文章评论数量',
   `enable_comment` TINYINT(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '文章评论开启状态: 1-允许评论,0-不允许评论',
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `leave_message` (
 DROP TABLE IF EXISTS `friend_link`;
 CREATE TABLE IF NOT EXISTS `friend_link` (
   `id`             INT(10) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '友链 ID,自增主键',
-  `priority`       INT(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '友链权重,权重值越低,展示的位置越上',
+  `priority`       INT(10) UNSIGNED NOT NULL DEFAULT '1' COMMENT '友链权重,权重值越低,展示的位置越上',
   `kind`           TINYINT(3) UNSIGNED NOT NULL DEFAULT '0' COMMENT '友链类型: 0-友情链接,1-推荐链接,2-站长个人链接',
   `display_state`  TINYINT(3) UNSIGNED NOT NULL DEFAULT '1' COMMENT '是否显示当前友链: 0-隐藏,1-显示',
   `name`           VARCHAR(100) NOT NULL COMMENT '友链名称',

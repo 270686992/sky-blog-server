@@ -28,7 +28,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<Category> getAllCategory() {
-        return this.categoryRepository.findAll();
+        return this.categoryRepository.findAllCategory();
     }
 
     @Override

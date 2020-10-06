@@ -27,12 +27,22 @@ public interface ArticleRepository extends JpaRepository<Article, Integer> {
     Article findOneById(Integer articleId);
 
     /**
+     * 根据分页查询对象查询当前页的文章列表
+     *
+     * @param pageable 分页查询对象
+     * @return 查询成功返回封装着符合查询条件的文章列表的分页对象, 查询不到返回封装着空列表的分页对象
+     */
+    @Query("select a from Article a where a.priority > 0")
+    Page<Article> findLatestArticleList(Pageable pageable);
+
+    /**
      * 通过文章分类 ID 和分页查询对象分页查询该分类下的文章列表
      *
      * @param categoryId 文章分类 ID
      * @param pageable   分页查询对象
      * @return 查询成功返回封装着符合查询条件的文章列表的分页对象, 查询不到返回封装着空列表的分页对象
      */
+    @Query("select a from Article a where a.categoryId = :categoryId and a.priority > 0")
     Page<Article> findByCategoryId(Integer categoryId, Pageable pageable);
 
     /**

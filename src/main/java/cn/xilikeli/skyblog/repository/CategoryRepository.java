@@ -2,6 +2,9 @@ package cn.xilikeli.skyblog.repository;
 
 import cn.xilikeli.skyblog.model.Category;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 /**
  * <p>
@@ -14,6 +17,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @since JDK1.8
  */
 public interface CategoryRepository extends JpaRepository<Category, Integer> {
+
+    /**
+     * 查询所有文章分类
+     *
+     * @return 返回所有文章分类
+     */
+    @Query("select c from Category c where c.priority > 0 order by c.priority")
+    List<Category> findAllCategory();
 
     /**
      * 通过文章分类 ID 查询对应的文章分类信息
